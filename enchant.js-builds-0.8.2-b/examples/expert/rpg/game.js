@@ -210,40 +210,82 @@ window.onload = function() {
 					var questions = ["q1", "q2"];
 					var answers = ["a1", "a2"];
 					var isAnswered = [false, false];
-					
-					function showQuestion(index) {
+
+
+                    function makeRadioButton(name, value, text) {
+
+                    var label = document.createElement("label");
+                    var radio = document.createElement("input");
+                    radio.type = "radio";
+                    radio.name = name;
+                    radio.value = value;
+
+                    label.appendChild(radio);
+
+                    label.appendChild(document.createTextNode(text));
+                    return label;
+                    }
+
+                    // Fråga 1
+					function showQuestion1() {
 						// already answered
-						if (isAnswered[index]) {
-							return;
+						if (isAnswered[0] == false) {
+					   
+                        var q = questions[0];
+                        var a = answers[0];
+                        
+                        // Frågan
+                        var elem = document.getElementById("theLink");
+                        elem.style.display = "block";
+                        var createinput = document.createTextNode(q);
+                        theLink.appendChild(createinput);
+
+                        // Svaren
+                        var yes_button = makeRadioButton("first", "yes", a);
+                        theLink.appendChild(yes_button);
+
+                        var new_button = makeRadioButton("second", "no", a);
+                        theLink.appendChild(new_button);
+                        
+                        // has now been answered
+                        isAnswered[0] = true;
+                        
+                        console.log(isAnswered[0])
+
 						} else {
-							
-							
-						var q = questions[index];
-						var a = answers[index];
-						
-						var elem = document.getElementById("theLink");
-						elem.style.display = "block";
-						
-						// has now been answered
-						isAnswered[index] = true;
-						}
-						
-						
-						
-					} 
+                            return;
+						}					
+					}
+                    // Fråga 2
+                    function showQuestion2(index) {
+                        // already answered
+                        if (isAnswered[1] == true) {
+                            return;
+                        } else {
+                        var q = questions[1];
+                        var a = answers[1];
+                        
+                        var elem = document.getElementById("theLink");
+                        elem.style.display = "block";
+
+                        var createinput = document.createTextNode(q);
+                        theLink.appendChild(createinput);
+
+                        // has now been answered
+                        isAnswered[1] = true;
+                        }                       
+                    } 
 
 					if(onTile(3, 2)) {
-					
 						console.log("!");
-						showQuestion(0);
+						showQuestion1();
 					} else if(onTile(6, 2)) {
-						
 						console.log("2!");
-						question[0];
-						answers[0];
-						showQuestion(1);
-						
-					}
+						showQuestion2();
+					} else {
+                        var elem = document.getElementById("theLink");
+                        elem.style.display= "none";
+                    }
 					
                     if (0 <= x && x < map.width && 0 <= y && y < map.height && !map.hitTest(x, y)) {
                         this.isMoving = true;
