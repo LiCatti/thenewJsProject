@@ -207,74 +207,7 @@ window.onload = function() {
 					}
 					// x, y
 					
-					var questions = ["q1", "q2"];
-					var answers = ["a1", "a2"];
-					var isAnswered = [false, false];
-
-
-                    function makeRadioButton(name, value, text) {
-
-                    var label = document.createElement("label");
-                    var radio = document.createElement("input");
-                    radio.type = "radio";
-                    radio.name = name;
-                    radio.value = value;
-
-                    label.appendChild(radio);
-
-                    label.appendChild(document.createTextNode(text));
-                    return label;
-                    }
-
-                    // Fråga 1
-					function showQuestion1() {
-						// already answered
-						if (isAnswered[0] == false) {
-					   
-                        var q = questions[0];
-                        var a = answers[0];
-                        
-                        // Frågan
-                        var elem = document.getElementById("theLink");
-                        elem.style.display = "block";
-                        var createinput = document.createTextNode(q);
-                        theLink.appendChild(createinput);
-
-                        // Svaren
-                        var yes_button = makeRadioButton("first", "yes", a);
-                        theLink.appendChild(yes_button);
-
-                        var new_button = makeRadioButton("second", "no", a);
-                        theLink.appendChild(new_button);
-                        
-                        // has now been answered
-                        isAnswered[0] = true;
-                        
-                        console.log(isAnswered[0])
-
-						} else {
-                            return;
-						}					
-					}
-                    // Fråga 2
-                    function showQuestion2(index) {
-                        // already answered
-                        if (isAnswered[1] == true) {
-                            return;
-                        } else {
-                        var q = questions[1];
-                        var a = answers[1];
-                        
-                        var elem = document.getElementById("theLink");
-                        elem.style.display = "block";
-
-                        var createinput = document.createTextNode(q);
-                        theLink.appendChild(createinput);
-
-                        // has now been answered
-                        isAnswered[1] = true;
-                        }                       
-                    } 
+					
 
 					if(onTile(3, 2)) {
 						console.log("!");
