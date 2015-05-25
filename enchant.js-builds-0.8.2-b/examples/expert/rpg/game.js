@@ -6,6 +6,8 @@ window.onload = function() {
     game.preload('map1.gif', 'chara0.gif');
     game.onload = function() {
         var map = new Map(16, 16);
+		var scene = new Scene();
+		var sprite = new Sprite
         map.image = game.assets['map1.gif'];
         map.loadData([
 			//loads images
@@ -207,18 +209,97 @@ window.onload = function() {
 					}
 					// x, y
 					
-					
+                    // Funktion för frågorna och svaren
+                    function showQuestion(index) {
+
+                        if ( isAnswered[index] == true ) {
+                            return;
+                        } else {
+                            var q = questions[index];          
+                           // Frågan
+                           var elem = document.getElementById("theList");
+                           elem.style.display = "block";
+                           var li = document.createElement("li");
+                            var createinput = document.createTextNode(q);
+                            li.appendChild(createinput);
+                            elem.appendChild(li);
+
+                            // Svaren
+                            var yes_button = makeRadioButton("first", "yes", answers[index*2]);
+                            elem.appendChild(yes_button);
+
+                            var no_button = makeRadioButton("second", "no", answers[index*2+1]);
+                            elem.appendChild(no_button);
+
+
+                            // Ett event läggs till på knappen och om man klickar på den
+                            // så får man upp att man svarat rätt
+                           yes_button.addEventListener("click", function(){
+                               stage.addChild(map);
+                               stage.addChild(foregroundMap);
+                               elem.style.display="none";        
+                               answerText.appendChild(textRight);
+                               game.start();
+                        }) 
+                           // Ett event läggs till på knappen och om man klickar på den
+                           // så får man upp att man har svarat fel
+                            no_button.addEventListener("click", function(){
+                                stage.addChild(map);
+                                stage.addChild(foregroundMap);
+                                elem.style.display = "none";
+                                answerText.appendChild(textWrong);	
+                                game.start();        
+                            })
+
+                        // has now been answered
+                        isAnswered[index] = true;
+                        }					
+                    }                   
+                    
 
 					if(onTile(3, 2)) {
-						console.log("!");
-						showQuestion1();
+                        showQuestion(0);
+                        game.pause();
+                        stage.removeChild(map);
+                        stage.removeChild(foregroundMap);
 					} else if(onTile(6, 2)) {
 						console.log("2!");
+						showQuestion(1);
+                        game.pause();
+                        stage.removeChild(map);
+                        stage.removeChild(foregroundMap);
+					} else if(onTile(6, 4)) {
+						console.log("2!");
+						showQuestion(2);
+					} else if(onTile(8, 4)) {
+						console.log("2!");
 						showQuestion2();
-					} else {
-                        var elem = document.getElementById("theLink");
+					} else if(onTile(8, 6)) {
+						console.log("2!");
+						showQuestion2();
+					} else if(onTile(10, 6)) {
+						console.log("2!");
+						showQuestion2();
+					}
+                    
+					else {
+                        var elem = document.getElementById("theList");
                         elem.style.display= "none";
-                    }
+						
+                        // En if-sats som gör att text-rutan där det står rätt eller fel
+                        // försvinner när man letar efter nästa fråga efter spelet startat igen
+                        if(answerText.firstChild){
+                            while(answerText.firstChild){
+                                answerText.removeChild(answerText.firstChild);
+                            }
+                        }
+                        
+						if(elem.firstChild){
+							while(elem.firstChild){
+							elem.removeChild(elem.firstChild);
+						}       
+				}
+						 }
 					
                     if (0 <= x && x < map.width && 0 <= y && y < map.height && !map.hitTest(x, y)) {
                         this.isMoving = true;
