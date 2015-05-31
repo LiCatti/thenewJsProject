@@ -1,0 +1,40 @@
+
+/* it hides all the questions from the database */
+p#theLink{ 
+    display:none;
+}
+
+body{
+    margin: auto;
+    background-color: #FFFFC2;
+}
+
+h1{
+    font-family: "Times New Roman", Georgia, Serif;
+    margin-right: 500px;
+    margin-left: 190px;
+}
+#theLink{
+    text-align: center;
+    float: right;
+	margin-left: 20px;
+	font-family: "Times New Roman", Georgia, Serif;
+    font-size: 20px;
+    border: 1px solid;
+    width: 500px;
+    height: 500px;
+    margin-right: 300px;
+    margin-top: 100px;
+    background-color: white;
+}
+
+button {
+    width: 150px;
+    height: 30px;
+    margin-top: 10px;
+    
+}
+
+label {
+    display: block;
+}
